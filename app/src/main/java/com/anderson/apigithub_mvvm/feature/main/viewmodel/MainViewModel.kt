@@ -22,7 +22,9 @@ class MainViewModel @Inject constructor(val repository: MainRepository) : BaseVi
     fun getListRepository(page: Int){
 
         mMediatorRespositories.addSource(getListRepositoryLiveDate(page)){
-            mLiveDataRespositories.value = it
+            if(it != null){
+                mLiveDataRespositories.value = it
+            }
         }
     }
 
@@ -30,18 +32,22 @@ class MainViewModel @Inject constructor(val repository: MainRepository) : BaseVi
 
         val dataLiveData: LiveData<List<RepositoryPresentation>> = Transformations.map(repository.getListRepository(page)){
 
-            it.forEach { input ->
-                lisAux.add(
-                    RepositoryPresentation(
-                        input.name,
-                        input.imgUrl,
-                        input.starsCount.toString(),
-                        input.forksCount.toString(),
-                        input.pullsUrls
-                ))
-            }
+            if(it != null){
+                it.forEach { input ->
+                    lisAux.add(
+                        RepositoryPresentation(
+                            input.name,
+                            input.imgUrl,
+                            input.starsCount.toString(),
+                            input.forksCount.toString(),
+                            input.pullsUrls
+                        ))
+                }
 
-            lisAux
+                lisAux
+            }else{
+                null
+            }
         }
 
         return dataLiveData
