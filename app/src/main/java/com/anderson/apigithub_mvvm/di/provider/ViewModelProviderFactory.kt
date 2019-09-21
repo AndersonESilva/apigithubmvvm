@@ -7,7 +7,7 @@ import javax.inject.Provider
 import javax.inject.Singleton
 
 /**
- * Created by anderson on 14/09/19.
+ * Created by anderson on 21/09/19.
  */
 @Singleton
 class ViewModelProviderFactory @Inject constructor(private val viewModelsMap: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>) : ViewModelProvider.Factory {
