@@ -26,12 +26,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun init() {
         bind.viewModel = viewModel
 
-        viewModel.getListRepository(page)
+        viewModel.getListRepositoryLiveDate(page).observe(this, Observer {
+            repositoryAdapter = RepositoryAdapter(it as ArrayList<RepositoryPresentation>)
 
-        viewModel.mMediatorRespositories.observe(this, Observer {
-            if(it != null){
-                repositoryAdapter = RepositoryAdapter(it as ArrayList<RepositoryPresentation>)
-            }
+            bind.listView.adapter = repositoryAdapter
         })
 
 //        bind.listView.setOnScrollListener(object : AbsListView.OnScrollListener{

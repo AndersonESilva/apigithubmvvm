@@ -1,79 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="@dimen/big_padding"
-        >
+<layout
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+                name="item"
+                type="com.anderson.apigithub_mvvm.data.presentation.RepositoryPresentation"/>
+
+    </data>
 
     <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/medium_text"
-                android:text="Nome Repositorio"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/small_text"
-                android:text="Descrição do repositorio, lorem loremlorem
-lorem loremlorem loremlorem"/>
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/big_padding"
+    >
 
         <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="250dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="@dimen/small_margin">
+                android:orientation="vertical">
 
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="644"
-                    android:textSize="16dp"/>
+                    android:textSize="@dimen/medium_text"
+                    android:text="@{item.name}"/>
 
+            <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/small_margin">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.forksCount}"
+                        android:textSize="16dp"/>
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{item.starsCount}"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="@dimen/very_big_margin"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+            <ImageView
+                    android:layout_width="@dimen/big_margin"
+                    android:layout_height="@dimen/big_margin"
+                    app:img_url="@{item.avatarUrl}"
+                    android:layout_gravity="center"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="44"
-                    android:textSize="16dp"
-                    android:layout_marginLeft="@dimen/very_big_margin"/>
+                    android:layout_gravity="center"
+                    android:text="@{item.login}"
+                    android:layout_marginTop="@dimen/mini_margin"
+            />
 
         </LinearLayout>
 
     </LinearLayout>
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-        <ImageView
-                android:layout_width="@dimen/big_margin"
-                android:layout_height="@dimen/big_margin"
-                android:src="@drawable/persona"
-                android:layout_gravity="center"/>
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="username"
-                android:layout_marginTop="@dimen/mini_margin"
-                />
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Nome Sobrenome"
-                android:textSize="@dimen/small_text"
-                android:layout_marginTop="@dimen/mini_margin"
-        />
-
-    </LinearLayout>
-
-</LinearLayout>
+</layout>

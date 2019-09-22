@@ -7,6 +7,7 @@ import android.widget.BaseAdapter
 import androidx.databinding.DataBindingUtil
 import com.anderson.apigithub_mvvm.R
 import com.anderson.apigithub_mvvm.data.presentation.RepositoryPresentation
+import com.anderson.apigithub_mvvm.databinding.ItemRepositoryBinding
 
 /**
  * Created by anderson on 21/09/19.
@@ -28,13 +29,13 @@ class RepositoryAdapter constructor(
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        //val binding: ItemMovieBinding
+        val binding: ItemRepositoryBinding
         var view  = LayoutInflater.from(parent?.context).inflate(R.layout.item_repository, null)
 
-//        binding = DataBindingUtil.bind(view)!!
-//        binding.item = this.moviesList[position]
-//
-//        return  binding.root
+        binding = DataBindingUtil.bind(view)!!
+        binding.item = this.list[position]
+
+        return  binding.root
 
         return view
     }

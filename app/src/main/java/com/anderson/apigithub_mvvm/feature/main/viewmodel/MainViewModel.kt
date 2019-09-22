@@ -17,18 +17,6 @@ class MainViewModel @Inject constructor(val repository: MainRepository) : BaseVi
 
     val lisAux : MutableList<RepositoryPresentation> = arrayListOf()
 
-    var mMediatorRespositories = MediatorLiveData<List<RepositoryPresentation>>()
-    var mLiveDataRespositories = MutableLiveData<List<RepositoryPresentation>>()
-
-    fun getListRepository(page: Int){
-
-        mMediatorRespositories.addSource(getListRepositoryLiveDate(page)){
-            if(it != null){
-                mLiveDataRespositories.value = it
-            }
-        }
-    }
-
     fun getListRepositoryLiveDate(page: Int): LiveData<List<RepositoryPresentation>> {
 
         return Transformations.map(repository.getListRepository(page)){
@@ -40,6 +28,7 @@ class MainViewModel @Inject constructor(val repository: MainRepository) : BaseVi
                     lisAux.add(
                         RepositoryPresentation(
                             input.name,
+                            input.ownerResponse.login,
                             input.starsCount.toString(),
                             input.forksCount.toString(),
                             input.pullsUrls,
