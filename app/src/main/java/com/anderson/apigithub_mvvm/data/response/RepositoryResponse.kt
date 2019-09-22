@@ -9,5 +9,7 @@ data class RepositoryResponse (
     @SerializedName("forks_count")
     val forksCount: Int,
     @SerializedName("pulls_url")
-    val pullsUrls: String
+    val pullsUrls: String,
+    @SerializedName("owner")
+    val ownerResponse: OwnerResponse
 )

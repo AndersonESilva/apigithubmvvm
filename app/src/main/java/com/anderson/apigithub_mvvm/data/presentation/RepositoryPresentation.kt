@@ -4,5 +4,6 @@ class RepositoryPresentation (
     val name: String,
     val starsCount: String,
     val forksCount: String,
-    val pullsUrls: String
+    val pullsUrls: String,
+    val avatarUrl: String
 )

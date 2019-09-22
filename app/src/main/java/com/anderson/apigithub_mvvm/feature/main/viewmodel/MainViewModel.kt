@@ -42,7 +42,8 @@ class MainViewModel @Inject constructor(val repository: MainRepository) : BaseVi
                             input.name,
                             input.starsCount.toString(),
                             input.forksCount.toString(),
-                            input.pullsUrls
+                            input.pullsUrls,
+                            input.ownerResponse.avatarUrl
                         ))
                 }
 
