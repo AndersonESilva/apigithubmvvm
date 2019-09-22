@@ -1,5 +1,7 @@
 package com.anderson.apigithub_mvvm.data.presentation
 
+import java.io.Serializable
+
 class RepositoryPresentation (
     val name: String,
     val login: String,
@@ -7,4 +9,4 @@ class RepositoryPresentation (
     val forksCount: String,
     val pullsUrls: String,
     val avatarUrl: String
-)
+): Serializable

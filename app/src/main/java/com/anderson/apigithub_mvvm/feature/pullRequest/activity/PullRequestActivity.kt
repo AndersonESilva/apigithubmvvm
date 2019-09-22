@@ -10,6 +10,10 @@ import com.anderson.apigithub_mvvm.feature.pullRequest.viewmodel.PullRequestView
  */
 class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequestViewModel>() {
 
+    companion object {
+        const val REPO_OBJ = "repoObj"
+    }
+
     override fun getLayoutId(): Int {
         return R.layout.activity_pull_request
     }
@@ -17,10 +21,7 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
     override fun getViewModelClass(): Class<PullRequestViewModel> = PullRequestViewModel::class.java
 
     override fun init() {
-
         bind.viewModel = viewModel
-
-
     }
 
 }

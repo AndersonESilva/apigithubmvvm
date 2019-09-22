@@ -1,9 +1,12 @@
 package com.anderson.apigithub_mvvm.feature.main.activity
 
 import android.app.Activity
+import android.content.Intent
 import android.opengl.Visibility
+import android.util.Log
 import android.view.View
 import android.widget.AbsListView
+import android.widget.AdapterView
 import androidx.lifecycle.Observer
 import br.com.anderson.apigithub_mvvm.ui.generic.base.activity.BaseActivity
 import com.anderson.apigithub_mvvm.R
@@ -11,6 +14,8 @@ import com.anderson.apigithub_mvvm.data.presentation.RepositoryPresentation
 import com.anderson.apigithub_mvvm.databinding.ActivityMainBinding
 import com.anderson.apigithub_mvvm.feature.main.adapter.RepositoryAdapter
 import com.anderson.apigithub_mvvm.feature.main.viewmodel.MainViewModel
+import com.anderson.apigithub_mvvm.feature.pullRequest.activity.PullRequestActivity
+import com.anderson.apigithub_mvvm.feature.pullRequest.activity.PullRequestActivity.Companion.REPO_OBJ
 
 /**
  * Created by anderson on 21/09/19.
@@ -48,6 +53,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
 
             loading = false
             bind.progressBar.visibility = View.INVISIBLE
+            onClickItem(it)
         })
     }
 
@@ -83,6 +89,8 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                                 bind.listView.adapter = repositoryAdapter
 
                                 bind.listView.setSelection(firstVisibleItem + 2)
+
+                                onClickItem(it)
                             }else{
                                 end = true
                             }
@@ -100,5 +108,22 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             }
 
         })
+    }
+
+    private fun onClickItem(it: ArrayList<RepositoryPresentation> ){
+
+        bind.listView.onItemClickListener = object : AdapterView.OnItemClickListener{
+
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = it.get(position)
+                Log.e("Click", selectedItem.name)
+
+                val intent = Intent(this@MainActivity, PullRequestActivity::class.java)
+                intent.putExtra(REPO_OBJ, selectedItem)
+
+                startActivity(intent)
+            }
+
+        }
     }
 }
