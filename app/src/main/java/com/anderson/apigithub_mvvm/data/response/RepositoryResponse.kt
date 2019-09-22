@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName
 
 data class RepositoryResponse (
     val name: String,
-    @SerializedName("owner.avatar_url")
-    val imgUrl: String,
     @SerializedName("stargazers_count")
     val starsCount: Int,
     @SerializedName("forks_count")

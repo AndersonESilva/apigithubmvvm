@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import br.com.anderson.apigithub_mvvm.ui.generic.base.viewmodel.BaseViewModel
 import com.anderson.apigithub_mvvm.data.presentation.RepositoryPresentation
+import com.anderson.apigithub_mvvm.data.response.RepositoryResponse
 import com.anderson.apigithub_mvvm.service.MainRepository
 import javax.inject.Inject
 
@@ -30,14 +31,15 @@ class MainViewModel @Inject constructor(val repository: MainRepository) : BaseVi
 
     fun getListRepositoryLiveDate(page: Int): LiveData<List<RepositoryPresentation>> {
 
-        val dataLiveData: LiveData<List<RepositoryPresentation>> = Transformations.map(repository.getListRepository(page)){
+        return Transformations.map(repository.getListRepository(page)){
 
-            if(it != null){
-                it.forEach { input ->
+            var listRepositoryResponse: List<RepositoryResponse> = it.items
+
+            if(listRepositoryResponse != null){
+                listRepositoryResponse.forEach { input ->
                     lisAux.add(
                         RepositoryPresentation(
                             input.name,
-                            input.imgUrl,
                             input.starsCount.toString(),
                             input.forksCount.toString(),
                             input.pullsUrls
@@ -49,7 +51,5 @@ class MainViewModel @Inject constructor(val repository: MainRepository) : BaseVi
                 null
             }
         }
-
-        return dataLiveData
     }
 }

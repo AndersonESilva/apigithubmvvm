@@ -2,6 +2,7 @@ package com.anderson.apigithub_mvvm.service
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.anderson.apigithub_mvvm.data.response.ItemResponse
 import com.anderson.apigithub_mvvm.data.response.RepositoryResponse
 import retrofit2.Call
 import retrofit2.Callback
@@ -10,17 +11,20 @@ import javax.inject.Inject
 
 class MainRepository @Inject constructor(val service: GitHutService) {
 
-    fun getListRepository(page : Int): MutableLiveData<List<RepositoryResponse>> {
-        val data = MutableLiveData<List<RepositoryResponse>>()
+    private var q = "language:Java"
+    private var sort = "stars"
 
-        service.getListRepository("language:Java","stars",page).enqueue(object : Callback<List<RepositoryResponse>> {
+    fun getListRepository(page : Int): MutableLiveData<ItemResponse> {
+        val data = MutableLiveData<ItemResponse>()
 
-            override fun onResponse(call: Call<List<RepositoryResponse>>, response: Response<List<RepositoryResponse>>) {
+        service.getListRepository(q,sort,page).enqueue(object : Callback<ItemResponse> {
+
+            override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
                 Log.e("Sucesso", response.body().toString())
                 data.value = response.body()
             }
 
-            override fun onFailure(call: Call<List<RepositoryResponse>>, t: Throwable) {
+            override fun onFailure(call: Call<ItemResponse>, t: Throwable) {
                 Log.e("CALLBACK", t.message)
             }
 
