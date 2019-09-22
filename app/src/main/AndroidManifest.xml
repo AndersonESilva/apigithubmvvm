@@ -12,6 +12,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity
+                android:name=".feature.pullRequest.activity.PullRequestActivity"
+                android:label="@string/title_activity_pull_request"
+                android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity android:name=".feature.main.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
