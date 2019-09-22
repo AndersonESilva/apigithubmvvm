@@ -1,6 +1,8 @@
 package com.anderson.apigithub_mvvm.feature.main.activity
 
 import android.app.Activity
+import android.opengl.Visibility
+import android.view.View
 import android.widget.AbsListView
 import androidx.lifecycle.Observer
 import br.com.anderson.apigithub_mvvm.ui.generic.base.activity.BaseActivity
@@ -43,6 +45,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             repositoryAdapter = RepositoryAdapter(it as ArrayList<RepositoryPresentation>)
 
             bind.listView.adapter = repositoryAdapter
+
+            loading = false
+            bind.progressBar.visibility = View.INVISIBLE
         })
     }
 
@@ -55,7 +60,10 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     if (totalItemCount < previousTotalItemCount) {
                         currentPage = 1
                         previousTotalItemCount = totalItemCount
-                        if (totalItemCount == 0) { loading = true; }
+                        if (totalItemCount == 0) {
+                            loading = true
+                            bind.progressBar.visibility = View.VISIBLE
+                        }
                     }
 
                     if (loading && (totalItemCount > previousTotalItemCount)) {
@@ -67,6 +75,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     if (!loading && (firstVisibleItem + visibleItemCount + visibleThreshold) >= totalItemCount ) {
 
                         loading = true
+                        bind.progressBar.visibility = View.VISIBLE
                         viewModel.getListRepositoryLiveDate(currentPage).observe(activity as MainActivity, Observer {
                             if(it != null){
                                 repositoryAdapter = RepositoryAdapter(it as ArrayList<RepositoryPresentation>)
@@ -77,6 +86,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                             }else{
                                 end = true
                             }
+
+                            loading = false
+                            bind.progressBar.visibility = View.INVISIBLE
                         })
                     }
 
