@@ -6,6 +6,6 @@ data class PullRequestPresentation(
     var loginUser: String,
     var avatarUrlUser: String,
     var title: String,
-    var data: LocalDate,
+    var data: String,
     var body: String
 )

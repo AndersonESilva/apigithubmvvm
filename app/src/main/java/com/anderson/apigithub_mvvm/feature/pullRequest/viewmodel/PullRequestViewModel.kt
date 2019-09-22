@@ -30,7 +30,7 @@ class PullRequestViewModel @Inject constructor(val repository: PullRequestReposi
                             input.user.login,
                             input.user.avatarUrl,
                             input.title,
-                            LocalDate.parse(input.updatedDate, DateTimeFormatter.ISO_DATE),
+                            LocalDate.parse(input.updatedDate, DateTimeFormatter.ISO_DATE).toString(),
                             input.body
                         )
                     )
