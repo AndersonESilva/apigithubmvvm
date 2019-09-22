@@ -10,10 +10,10 @@ import javax.inject.Inject
 
 class PullRequestRepository @Inject constructor(val service: GitHutService){
 
-    fun getPullsRequest(creator : String, repository: String): MutableLiveData<List<PullRequestResponse>> {
+    fun getPullsRequest(creator : String, repositoryName: String): MutableLiveData<List<PullRequestResponse>> {
         val data = MutableLiveData<List<PullRequestResponse>>()
 
-        service.getPullsRequest(creator,repository).enqueue(object : Callback<List<PullRequestResponse>> {
+        service.getPullsRequest(creator,repositoryName).enqueue(object : Callback<List<PullRequestResponse>> {
 
             override fun onResponse(call: Call<List<PullRequestResponse>>, response: Response<List<PullRequestResponse>>) {
                 Log.e("Sucesso", response.body().toString())

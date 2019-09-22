@@ -19,9 +19,9 @@ interface GitHutService {
         @Query("page")  page: Int
     ): Call<ItemResponse>
 
-    @GET("repos/{creator}/{repository}/pulls")
+    @GET("repos/{creator}/{repositoryName}/pulls")
     fun getPullsRequest(
         @Path("creator") creator: String,
-        @Path("repository") repository: String
+        @Path("repositoryName") repositoryName: String
     ): Call<List<PullRequestResponse>>
 }
