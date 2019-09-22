@@ -21,7 +21,9 @@ class MainRepository @Inject constructor(val service: GitHutService) {
 
             override fun onResponse(call: Call<ItemResponse>, response: Response<ItemResponse>) {
                 Log.e("Sucesso", response.body().toString())
-                data.value = response.body()
+                if(response.body() != null){
+                    data.value = response.body()
+                }
             }
 
             override fun onFailure(call: Call<ItemResponse>, t: Throwable) {

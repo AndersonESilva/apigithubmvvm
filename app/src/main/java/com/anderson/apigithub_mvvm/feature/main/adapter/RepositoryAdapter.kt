@@ -36,7 +36,5 @@ class RepositoryAdapter constructor(
         binding.item = this.list[position]
 
         return  binding.root
-
-        return view
     }
 }
