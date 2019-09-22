@@ -9,6 +9,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
+/**
+ * Created by anderson on 21/09/19.
+ */
 class MainRepository @Inject constructor(val service: GitHutService) {
 
     private var q = "language:Java"

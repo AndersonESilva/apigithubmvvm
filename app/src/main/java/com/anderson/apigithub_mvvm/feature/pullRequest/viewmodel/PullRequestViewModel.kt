@@ -11,6 +11,9 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
+/**
+ * Created by anderson on 22/09/19.
+ */
 class PullRequestViewModel @Inject constructor(val repository: PullRequestRepository) : BaseViewModel(){
 
     val lisAux : MutableList<PullRequestPresentation> = arrayListOf()

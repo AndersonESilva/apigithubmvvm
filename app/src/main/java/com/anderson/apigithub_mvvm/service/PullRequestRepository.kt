@@ -8,6 +8,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import javax.inject.Inject
 
+/**
+ * Created by anderson on 22/09/19.
+ */
 class PullRequestRepository @Inject constructor(val service: GitHutService){
 
     fun getPullsRequest(creator : String, repositoryName: String): MutableLiveData<List<PullRequestResponse>> {

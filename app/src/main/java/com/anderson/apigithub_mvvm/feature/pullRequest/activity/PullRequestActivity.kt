@@ -1,16 +1,26 @@
 package com.anderson.apigithub_mvvm.feature.pullRequest.activity
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity;
+import br.com.anderson.apigithub_mvvm.ui.generic.base.activity.BaseActivity
 import com.anderson.apigithub_mvvm.R
+import com.anderson.apigithub_mvvm.databinding.ActivityPullRequestBinding
+import com.anderson.apigithub_mvvm.feature.pullRequest.viewmodel.PullRequestViewModel
 
-import kotlinx.android.synthetic.main.activity_pull_request.*
+/**
+ * Created by anderson on 22/09/19.
+ */
+class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequestViewModel>() {
 
-class PullRequestActivity : AppCompatActivity() {
+    override fun getLayoutId(): Int {
+        return R.layout.activity_pull_request
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pull_request)
+    override fun getViewModelClass(): Class<PullRequestViewModel> = PullRequestViewModel::class.java
+
+    override fun init() {
+
+        bind.viewModel = viewModel
+
+
     }
 
 }

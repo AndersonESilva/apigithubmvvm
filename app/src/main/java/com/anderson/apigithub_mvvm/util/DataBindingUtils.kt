@@ -4,6 +4,9 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.squareup.picasso.Picasso
 
+/**
+ * Created by anderson on 21/09/19.
+ */
 object DataBindingUtils {
 
     @JvmStatic
