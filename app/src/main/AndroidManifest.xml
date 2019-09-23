@@ -14,8 +14,7 @@
             android:theme="@style/AppTheme">
         <activity
                 android:name=".feature.pullRequest.activity.PullRequestActivity"
-                android:label="@string/title_activity_pull_request"
-                android:theme="@style/AppTheme.NoActionBar">
+                android:label="@string/title_activity_pull_request">
         </activity>
         <activity android:name=".feature.main.activity.MainActivity">
             <intent-filter>

@@ -40,6 +40,17 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
 
         repositoryPresentation = (getIntent().getExtras()?.getSerializable(REPO_OBJ) as? RepositoryPresentation)!!
 
+        initToolbar()
+        initListView()
+    }
+
+    private fun initToolbar(){
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = resources.getString(R.string.pull_requests)
+    }
+
+    private fun initListView(){
         viewModel.getListRepositoryLiveDate(repositoryPresentation.login, repositoryPresentation.name).observe(this, Observer {
             pullRequestAdapter = PullRequestAdapter(it as ArrayList<PullRequestPresentation>)
 
@@ -64,4 +75,8 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
         }
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }
 }

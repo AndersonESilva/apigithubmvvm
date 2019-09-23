@@ -41,8 +41,13 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         bind.viewModel = viewModel
         activity = this
 
+        initToolbar()
         initPage1()
         initScroll()
+    }
+
+    private fun initToolbar(){
+        supportActionBar?.title = resources.getString(R.string.app_name)
     }
 
     private fun initPage1(){
