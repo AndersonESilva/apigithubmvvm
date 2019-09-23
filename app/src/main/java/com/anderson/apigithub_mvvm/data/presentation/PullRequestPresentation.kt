@@ -1,7 +1,8 @@
 package com.anderson.apigithub_mvvm.data.presentation
 
-import java.time.LocalDate
-
+/**
+ * Created by anderson on 22/09/19.
+ */
 data class PullRequestPresentation(
     var loginUser: String,
     var avatarUrlUser: String,
