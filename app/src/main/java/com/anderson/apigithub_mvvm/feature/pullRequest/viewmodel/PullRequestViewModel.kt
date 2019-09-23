@@ -26,7 +26,8 @@ class PullRequestViewModel @Inject constructor(val repository: PullRequestReposi
                             input.user.avatarUrl,
                             input.title,
                             formtDate(input.updatedDate),
-                            input.body
+                            input.body,
+                            input.htmlUrl
                         )
                     )
                 }

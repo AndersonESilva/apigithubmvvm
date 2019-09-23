@@ -1,7 +1,11 @@
 package com.anderson.apigithub_mvvm.feature.pullRequest.activity
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Build
+import android.util.Log
 import android.view.View
+import android.widget.AdapterView
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
 import br.com.anderson.apigithub_mvvm.ui.generic.base.activity.BaseActivity
@@ -41,8 +45,23 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
 
             bind.listView.adapter = pullRequestAdapter
             bind.progressBar.visibility = View.INVISIBLE
-
+            onClickItem(it)
         })
+    }
+
+    private fun onClickItem(it: ArrayList<PullRequestPresentation> ){
+
+        bind.listView.onItemClickListener = object : AdapterView.OnItemClickListener{
+
+            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val selectedItem = it.get(position)
+
+                var openUrl = Intent(Intent.ACTION_VIEW)
+                openUrl.data = Uri.parse(selectedItem.htmlUrl)
+                startActivity(openUrl)
+            }
+
+        }
     }
 
 }

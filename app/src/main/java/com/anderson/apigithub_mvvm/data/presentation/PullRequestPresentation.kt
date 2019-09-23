@@ -7,5 +7,6 @@ data class PullRequestPresentation(
     var avatarUrlUser: String,
     var title: String,
     var data: String,
-    var body: String
+    var body: String,
+    var htmlUrl: String
 )

@@ -7,5 +7,7 @@ data class PullRequestResponse(
     var title: String,
     @SerializedName("updated_at")
     var updatedDate: String,
-    var body: String
+    var body: String,
+    @SerializedName("html_url")
+    var htmlUrl: String
 )
