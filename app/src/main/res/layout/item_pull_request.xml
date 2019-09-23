@@ -19,7 +19,7 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
             <TextView
                     android:layout_width="match_parent"
@@ -31,7 +31,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/small_text"
-                    android:layout_gravity="right"
                     android:text="@{item.data}"/>
 
         </LinearLayout>
@@ -39,23 +38,23 @@
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="@dimen/medium_text"
+                android:textSize="@dimen/small_text"
+                android:layout_marginTop="@dimen/small_margin"
                 android:text="@{item.body}"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:layout_marginTop="@dimen/small_margin">
 
             <ImageView
                     android:layout_width="@dimen/medium_margin"
                     android:layout_height="@dimen/medium_margin"
-                    app:img_url="@{item.avatarUrlUser}"
-                    android:layout_gravity="center"/>
+                    app:img_url="@{item.avatarUrlUser}"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:text="@{item.loginUser}"/>
 
         </LinearLayout>
