@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
  * Created by anderson on 21/09/19.
  */
-class MainViewModel @Inject constructor(val repository: MainRepository) : BaseViewModel() {
+class MainViewModel @Inject constructor(private val repository: MainRepository) : BaseViewModel() {
 
     val lisAux : MutableList<RepositoryPresentation> = arrayListOf()
 

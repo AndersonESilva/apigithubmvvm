@@ -1,4 +1,4 @@
-package com.anderson.apigithub_mvvm.util
+package com.anderson.apigithub_mvvm.common
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

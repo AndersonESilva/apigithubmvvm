@@ -4,7 +4,7 @@ import android.app.Application
 import android.content.Context
 import com.anderson.apigithub_mvvm.AppApplication
 import com.anderson.apigithub_mvvm.R
-import com.anderson.apigithub_mvvm.service.GitHutService
+import com.anderson.apigithub_mvvm.service.GitHubService
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
@@ -25,12 +25,12 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideSkyService(): GitHutService {
+    fun provideGihubService(): GitHubService {
         return Retrofit.Builder()
             .baseUrl(AppApplication.instance.getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(GitHutService::class.java)
+            .create(GitHubService::class.java)
     }
 
 }

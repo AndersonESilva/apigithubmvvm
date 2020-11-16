@@ -11,7 +11,7 @@ import javax.inject.Inject
 /**
  * Created by anderson on 22/09/19.
  */
-class PullRequestRepository @Inject constructor(val service: GitHutService){
+class PullRequestRepository @Inject constructor(val service: GitHubService){
 
     fun getPullsRequest(creator : String, repositoryName: String): MutableLiveData<List<PullRequestResponse>> {
         val data = MutableLiveData<List<PullRequestResponse>>()
