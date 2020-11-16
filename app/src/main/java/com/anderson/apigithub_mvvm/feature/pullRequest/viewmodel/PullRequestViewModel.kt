@@ -2,7 +2,7 @@ package com.anderson.apigithub_mvvm.feature.pullRequest.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import br.com.anderson.apigithub_mvvm.ui.generic.base.viewmodel.BaseViewModel
+import com.anderson.apigithub_mvvm.feature.common.BaseViewModel
 import com.anderson.apigithub_mvvm.data.presentation.PullRequestPresentation
 import com.anderson.apigithub_mvvm.service.PullRequestRepository
 import javax.inject.Inject

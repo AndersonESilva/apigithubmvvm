@@ -7,7 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import br.com.anderson.apigithub_mvvm.ui.generic.base.viewmodel.BaseViewModel
+import com.anderson.apigithub_mvvm.feature.common.BaseViewModel
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
