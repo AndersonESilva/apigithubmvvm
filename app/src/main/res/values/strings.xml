@@ -5,4 +5,8 @@
     //url
     <string name="base_url">https://api.github.com/</string>
     <string name="title_activity_pull_request">PullRequestActivity</string>
+
+    <string name="ok_understand">Ok, entendi</string>
+    <string name="generic_error_title">Ops!</string>
+    <string name="error_generic">Aconteceu algo inesperaado, por favor tente novamente.</string>
 </resources>

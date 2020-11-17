@@ -14,4 +14,6 @@
     <dimen name="medium_margin">30dp</dimen>
     <dimen name="small_margin">15dp</dimen>
     <dimen name="mini_margin">3dp</dimen>
+
+    <dimen name="dimen_32">32dp</dimen>
 </resources>

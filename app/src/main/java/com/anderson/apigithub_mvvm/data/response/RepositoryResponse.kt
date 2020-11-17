@@ -3,6 +3,9 @@ package com.anderson.apigithub_mvvm.data.response
 import com.google.gson.annotations.SerializedName
 
 data class RepositoryResponse (
+    @SerializedName("id")
+    val id: String,
+    @SerializedName("name")
     val name: String,
     @SerializedName("stargazers_count")
     val starsCount: Int,

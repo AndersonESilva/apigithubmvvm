@@ -15,6 +15,7 @@ class PullRequestConverter @Inject constructor() : BaseConverter<List<PullReques
         input.forEach { input ->
             data.add(
                 PullRequestPresentation(
+                    input.id,
                     input.user.login,
                     input.user.avatarUrl,
                     input.title,

@@ -1,18 +1,17 @@
 package com.anderson.apigithub_mvvm.feature.pullRequest.activity
 
+import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
-import android.util.Log
 import android.view.View
 import android.widget.AdapterView
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.Observer
-import br.com.anderson.apigithub_mvvm.ui.generic.base.activity.BaseActivity
 import com.anderson.apigithub_mvvm.R
 import com.anderson.apigithub_mvvm.data.presentation.PullRequestPresentation
 import com.anderson.apigithub_mvvm.data.presentation.RepositoryPresentation
+import com.anderson.apigithub_mvvm.data.response.Resource
 import com.anderson.apigithub_mvvm.databinding.ActivityPullRequestBinding
+import com.anderson.apigithub_mvvm.feature.common.BaseActivity
 import com.anderson.apigithub_mvvm.feature.pullRequest.adapter.PullRequestAdapter
 import com.anderson.apigithub_mvvm.feature.pullRequest.viewmodel.PullRequestViewModel
 
@@ -23,6 +22,11 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
 
     companion object {
         const val REPO_OBJ = "repoObj"
+
+        fun start(source: Activity){
+            val intent = Intent(source, PullRequestActivity::class.java)
+            source.startActivity(intent)
+        }
     }
 
     private lateinit var repositoryPresentation: RepositoryPresentation
@@ -34,11 +38,10 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
 
     override fun getViewModelClass(): Class<PullRequestViewModel> = PullRequestViewModel::class.java
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun init() {
         bind.viewModel = viewModel
 
-        repositoryPresentation = (getIntent().getExtras()?.getSerializable(REPO_OBJ) as? RepositoryPresentation)!!
+        repositoryPresentation = (intent.extras?.getSerializable(REPO_OBJ) as? RepositoryPresentation)!!
 
         initToolbar()
         initListView()
@@ -48,6 +51,17 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
         supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = resources.getString(R.string.pull_requests)
+    }
+
+    private fun observeResource(){
+        viewModel.resource.observe(this, Observer { resource ->
+            when(resource.status) {
+                Resource.Status.INIT -> { showLoading() }
+                Resource.Status.SUCCESS -> {}
+                Resource.Status.LOADING -> {}
+                Resource.Status.ERROR -> {}
+            }
+        })
     }
 
     private fun initListView(){
@@ -62,17 +76,14 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
 
     private fun onClickItem(it: ArrayList<PullRequestPresentation> ){
 
-        bind.listView.onItemClickListener = object : AdapterView.OnItemClickListener{
-
-            override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        bind.listView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
                 val selectedItem = it.get(position)
 
-                var openUrl = Intent(Intent.ACTION_VIEW)
+                val openUrl = Intent(Intent.ACTION_VIEW)
                 openUrl.data = Uri.parse(selectedItem.htmlUrl)
                 startActivity(openUrl)
             }
-
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

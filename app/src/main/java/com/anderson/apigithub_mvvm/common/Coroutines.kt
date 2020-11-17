@@ -6,7 +6,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
 /**
- * Created by anderson on 01/10/2020.
+ * Created by anderson on 16/11/2020.
  */
 object Coroutines {
 

@@ -15,6 +15,7 @@ class MainConverter @Inject constructor() : BaseConverter<List<RepositoryRespons
         input.forEach { input ->
             data.add(
                 RepositoryPresentation(
+                    input.id,
                     input.name,
                     input.ownerResponse.login,
                     input.starsCount.toString(),

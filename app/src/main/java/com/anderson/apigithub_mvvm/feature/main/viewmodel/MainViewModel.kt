@@ -30,6 +30,7 @@ class MainViewModel @Inject constructor(private val repository: GitHubRepository
 
     init {
         _resource.value = Resource.init()
+        getRepositories()
     }
 
     fun getRepositories(){
@@ -50,33 +51,5 @@ class MainViewModel @Inject constructor(private val repository: GitHubRepository
                 }
             }
         )
-    }
-
-    val lisAux : MutableList<RepositoryPresentation> = arrayListOf()
-
-    fun getListRepositoryLiveDate(page: Int): LiveData<List<RepositoryPresentation>> {
-
-        return Transformations.map(repositoryX.getListRepository(page)){
-
-            var listRepositoryResponse: List<RepositoryResponse> = it.items
-
-            if(listRepositoryResponse != null){
-                listRepositoryResponse.forEach { input ->
-                    lisAux.add(
-                        RepositoryPresentation(
-                            input.name,
-                            input.ownerResponse.login,
-                            input.starsCount.toString(),
-                            input.forksCount.toString(),
-                            input.pullsUrls,
-                            input.ownerResponse.avatarUrl
-                        ))
-                }
-
-                lisAux
-            }else{
-                null
-            }
-        }
     }
 }

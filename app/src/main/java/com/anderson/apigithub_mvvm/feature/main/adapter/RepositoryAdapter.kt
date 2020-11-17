@@ -1,10 +1,13 @@
 package com.anderson.apigithub_mvvm.feature.main.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.anderson.apigithub_mvvm.R
 import com.anderson.apigithub_mvvm.data.presentation.RepositoryPresentation
 import com.anderson.apigithub_mvvm.databinding.ItemRepositoryBinding
@@ -12,29 +15,40 @@ import com.anderson.apigithub_mvvm.databinding.ItemRepositoryBinding
 /**
  * Created by anderson on 21/09/19.
  */
-class RepositoryAdapter constructor(
-    var list: ArrayList<RepositoryPresentation>
-) : BaseAdapter() {
+class RepositoryAdapter constructor(private val clickAction: ((presentation: RepositoryPresentation) -> Unit)): ListAdapter<RepositoryPresentation, RepositoryListItemViewHolder>(DiffCallback()) {
 
-    override fun getItem(position: Int): Any {
-        return list[position]
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryListItemViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.item_repository, parent, false)
+
+        return RepositoryListItemViewHolder(view)
     }
 
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
+    override fun onBindViewHolder(holder: RepositoryListItemViewHolder, position: Int) {
+        holder.bind(getItem(position))
+        holder.itemView.setOnClickListener{
+            clickAction.invoke(getItem(position))
+        }
+    }
+}
+
+class RepositoryListItemViewHolder ( itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    fun bind(presentation: RepositoryPresentation){
+        val binding: ItemRepositoryBinding? = DataBindingUtil.bind(itemView)
+        binding?.item = presentation
     }
 
-    override fun getCount(): Int {
-        return list.size
+}
+
+private class DiffCallback : DiffUtil.ItemCallback<RepositoryPresentation>() {
+
+    override fun areItemsTheSame(oldItem: RepositoryPresentation, newItem: RepositoryPresentation): Boolean {
+        return oldItem.id == newItem.id
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val binding: ItemRepositoryBinding
-        var view  = LayoutInflater.from(parent?.context).inflate(R.layout.item_repository, null)
-
-        binding = DataBindingUtil.bind(view)!!
-        binding.item = this.list[position]
-
-        return  binding.root
+    @SuppressLint("DiffUtilEquals")
+    override fun areContentsTheSame(oldItem: RepositoryPresentation, newItem: RepositoryPresentation): Boolean {
+        return oldItem == newItem
     }
 }

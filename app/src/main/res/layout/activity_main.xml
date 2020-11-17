@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -12,31 +14,25 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        <ListView
-                android:id="@+id/listView"
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleMain"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_alignParentBottom="true"
                 app:layout_constraintStart_toStartOf="parent">
-        </ListView>
+        </androidx.recyclerview.widget.RecyclerView>
 
-        <ProgressBar
-                android:id="@+id/progressBar"
+        <androidx.core.widget.ContentLoadingProgressBar
+                android:id="@+id/progressMain"
                 style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="invisible"
-                android:progressDrawable="@drawable/circular_progress_bar"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_alignParentBottom="true"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginBottom="300dp"/>
-
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dimen_32"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:visibility="visible" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </layout>

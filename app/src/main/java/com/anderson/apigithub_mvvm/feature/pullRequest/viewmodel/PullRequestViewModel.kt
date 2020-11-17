@@ -58,6 +58,7 @@ class PullRequestViewModel @Inject constructor(private val repository: GitHubRep
                 it.forEach { input ->
                     lisAux.add(
                         PullRequestPresentation(
+                            input.id,
                             input.user.login,
                             input.user.avatarUrl,
                             input.title,
