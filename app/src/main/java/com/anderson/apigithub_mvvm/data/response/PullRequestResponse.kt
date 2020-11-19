@@ -6,8 +6,8 @@ import com.google.gson.annotations.SerializedName
  * Created by anderson on 22/09/19.
  */
 data class PullRequestResponse(
-    @SerializedName("id")
-    val id: Int,
+    @SerializedName("node_id")
+    val id: String,
     @SerializedName("user")
     var user: UserResponse,
     @SerializedName("title")

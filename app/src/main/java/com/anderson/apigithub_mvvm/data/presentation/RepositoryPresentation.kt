@@ -3,7 +3,7 @@ package com.anderson.apigithub_mvvm.data.presentation
 import java.io.Serializable
 
 class RepositoryPresentation (
-    val id: Int,
+    val id: String,
     val name: String,
     val login: String,
     val starsCount: String,

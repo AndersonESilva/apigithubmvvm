@@ -44,7 +44,7 @@ class RepositoryListItemViewHolder ( itemView: View) : RecyclerView.ViewHolder(i
 private class DiffCallback : DiffUtil.ItemCallback<RepositoryPresentation>() {
 
     override fun areItemsTheSame(oldItem: RepositoryPresentation, newItem: RepositoryPresentation): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.id == newItem.id
     }
 
     @SuppressLint("DiffUtilEquals")
