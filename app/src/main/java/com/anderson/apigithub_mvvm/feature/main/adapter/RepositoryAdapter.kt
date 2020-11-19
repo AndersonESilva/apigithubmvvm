@@ -15,7 +15,8 @@ import com.anderson.apigithub_mvvm.databinding.ItemRepositoryBinding
 /**
  * Created by anderson on 21/09/19.
  */
-class RepositoryAdapter constructor(private val clickAction: ((presentation: RepositoryPresentation) -> Unit)): ListAdapter<RepositoryPresentation, RepositoryListItemViewHolder>(DiffCallback()) {
+class RepositoryAdapter constructor(private val clickAction: ((presentation: RepositoryPresentation) -> Unit)):
+    ListAdapter<RepositoryPresentation, RepositoryListItemViewHolder>(DiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryListItemViewHolder {
         val view = LayoutInflater.from(parent.context)

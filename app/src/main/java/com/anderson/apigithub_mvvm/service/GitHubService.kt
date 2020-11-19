@@ -21,12 +21,6 @@ interface GitHubService {
     ): Response<ItemResponse>
 
     @GET("repos/{creator}/{repositoryName}/pulls")
-    fun getPullsRequest(
-        @Path("creator") creator: String,
-        @Path("repositoryName") repositoryName: String
-    ): Call<List<PullRequestResponse>>
-
-    @GET("repos/{creator}/{repositoryName}/pulls")
     suspend fun getPullRequestes(
         @Path("creator") creator: String,
         @Path("repositoryName") repositoryName: String

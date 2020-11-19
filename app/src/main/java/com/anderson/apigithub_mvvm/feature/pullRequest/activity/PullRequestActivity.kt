@@ -1,11 +1,11 @@
 package com.anderson.apigithub_mvvm.feature.pullRequest.activity
 
-import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import android.widget.AdapterView
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.anderson.apigithub_mvvm.R
 import com.anderson.apigithub_mvvm.data.presentation.PullRequestPresentation
 import com.anderson.apigithub_mvvm.data.presentation.RepositoryPresentation
@@ -23,14 +23,15 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
     companion object {
         const val REPO_OBJ = "repoObj"
 
-        fun start(source: Activity){
+        fun start(source: Context, presentation: RepositoryPresentation){
             val intent = Intent(source, PullRequestActivity::class.java)
+            intent.putExtra(REPO_OBJ, presentation)
             source.startActivity(intent)
         }
     }
 
     private lateinit var repositoryPresentation: RepositoryPresentation
-    private lateinit var pullRequestAdapter: PullRequestAdapter
+    private lateinit var adapter: PullRequestAdapter
 
     override fun getLayoutId(): Int {
         return R.layout.activity_pull_request
@@ -44,7 +45,23 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
         repositoryPresentation = (intent.extras?.getSerializable(REPO_OBJ) as? RepositoryPresentation)!!
 
         initToolbar()
-        initListView()
+        initRecyclerView()
+        observeResource()
+        startData()
+    }
+
+    fun startData(){
+        viewModel.getPullRequestes(repositoryPresentation.login, repositoryPresentation.name)
+    }
+
+    private fun initRecyclerView(){
+        adapter = PullRequestAdapter { clickInItem(it) }
+
+        bind.recyclerPull.also {
+            it.setHasFixedSize(true)
+            it.layoutManager = LinearLayoutManager(this)
+            it.adapter = adapter
+        }
     }
 
     private fun initToolbar(){
@@ -57,33 +74,28 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
         viewModel.resource.observe(this, Observer { resource ->
             when(resource.status) {
                 Resource.Status.INIT -> { showLoading() }
-                Resource.Status.SUCCESS -> {}
-                Resource.Status.LOADING -> {}
-                Resource.Status.ERROR -> {}
+                Resource.Status.SUCCESS -> {
+                    hideLoading()
+                    bind.progressPull.visibility = View.GONE
+                    adapter.submitList(resource.data)
+                    adapter.notifyDataSetChanged()
+
+                }
+                Resource.Status.LOADING -> {
+                    bind.progressPull.visibility = View.VISIBLE
+                }
+                Resource.Status.ERROR -> {
+                    hideLoading()
+                    showError()
+                }
             }
         })
     }
 
-    private fun initListView(){
-        viewModel.getListRepositoryLiveDate(repositoryPresentation.login, repositoryPresentation.name).observe(this, Observer {
-            pullRequestAdapter = PullRequestAdapter(it as ArrayList<PullRequestPresentation>)
-
-            bind.listView.adapter = pullRequestAdapter
-            bind.progressBar.visibility = View.INVISIBLE
-            onClickItem(it)
-        })
-    }
-
-    private fun onClickItem(it: ArrayList<PullRequestPresentation> ){
-
-        bind.listView.onItemClickListener =
-            AdapterView.OnItemClickListener { parent, view, position, id ->
-                val selectedItem = it.get(position)
-
-                val openUrl = Intent(Intent.ACTION_VIEW)
-                openUrl.data = Uri.parse(selectedItem.htmlUrl)
-                startActivity(openUrl)
-            }
+    private fun clickInItem(item: PullRequestPresentation){
+        val openUrl = Intent(Intent.ACTION_VIEW)
+        openUrl.data = Uri.parse(item.htmlUrl)
+        startActivity(openUrl)
     }
 
     override fun onSupportNavigateUp(): Boolean {

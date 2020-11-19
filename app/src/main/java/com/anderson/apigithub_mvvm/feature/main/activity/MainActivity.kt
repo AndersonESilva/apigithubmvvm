@@ -1,6 +1,5 @@
 package com.anderson.apigithub_mvvm.feature.main.activity
 
-import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,7 +12,6 @@ import com.anderson.apigithub_mvvm.feature.common.BaseActivity
 import com.anderson.apigithub_mvvm.feature.main.adapter.RepositoryAdapter
 import com.anderson.apigithub_mvvm.feature.main.viewmodel.MainViewModel
 import com.anderson.apigithub_mvvm.feature.pullRequest.activity.PullRequestActivity
-import com.anderson.apigithub_mvvm.feature.pullRequest.activity.PullRequestActivity.Companion.REPO_OBJ
 
 /**
  * Created by anderson on 21/09/19.
@@ -39,9 +37,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun initRecyclerView(){
-        adapter = RepositoryAdapter { clickInRepositorio(it) }
+        adapter = RepositoryAdapter { clickInItem(it) }
 
-        bind.recycleMain.also {
+        bind.recyclerMain.also {
             it.setHasFixedSize(true)
             it.layoutManager = LinearLayoutManager(this)
             it.addOnScrollListener(onScrollListener())
@@ -74,17 +72,15 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         return object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if(!bind.recycleMain.canScrollVertically(1)){
+                if(!bind.recyclerMain.canScrollVertically(1)){
                     viewModel.getRepositories()
                 }
             }
         }
     }
 
-    private fun clickInRepositorio(presentation: RepositoryPresentation){
-        val intent = Intent(this@MainActivity, PullRequestActivity::class.java)
-        intent.putExtra(REPO_OBJ, presentation)
-        startActivity(intent)
+    private fun clickInItem(item: RepositoryPresentation){
+        PullRequestActivity.start(this, item)
     }
 
 }
