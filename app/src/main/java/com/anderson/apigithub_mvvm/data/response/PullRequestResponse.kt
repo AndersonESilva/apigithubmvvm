@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName
  */
 data class PullRequestResponse(
     @SerializedName("id")
-    val id: String,
+    val id: Int,
     @SerializedName("user")
     var user: UserResponse,
     @SerializedName("title")

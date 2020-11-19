@@ -14,18 +14,11 @@ import retrofit2.http.Query
 interface GitHubService {
 
     @GET("search/repositories")
-    fun getRepositories(
+    suspend fun getRepositories(
         @Query("q") q: String,
         @Query("sort") sort: String,
         @Query("page")  page: Int
     ): Response<ItemResponse>
-
-    @GET("search/repositories")
-    fun getListRepository(
-        @Query("q") q: String,
-        @Query("sort") sort: String,
-        @Query("page")  page: Int
-    ): Call<ItemResponse>
 
     @GET("repos/{creator}/{repositoryName}/pulls")
     fun getPullsRequest(
@@ -34,7 +27,7 @@ interface GitHubService {
     ): Call<List<PullRequestResponse>>
 
     @GET("repos/{creator}/{repositoryName}/pulls")
-    fun getPullRequestes(
+    suspend fun getPullRequestes(
         @Path("creator") creator: String,
         @Path("repositoryName") repositoryName: String
     ): Response<List<PullRequestResponse>>

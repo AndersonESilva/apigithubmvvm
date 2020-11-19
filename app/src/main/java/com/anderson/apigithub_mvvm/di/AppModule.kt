@@ -7,6 +7,7 @@ import com.anderson.apigithub_mvvm.R
 import com.anderson.apigithub_mvvm.service.GitHubService
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -25,10 +26,11 @@ class AppModule {
 
     @Singleton
     @Provides
-    fun provideGihubService(): GitHubService {
+    fun provideGitHubService(): GitHubService {
         return Retrofit.Builder()
             .baseUrl(AppApplication.instance.getString(R.string.base_url))
             .addConverterFactory(GsonConverterFactory.create())
+            .client(OkHttpClient.Builder().build())
             .build()
             .create(GitHubService::class.java)
     }

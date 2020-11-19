@@ -26,7 +26,7 @@ abstract class ViewModelBuilder {
     @Binds
     @IntoMap
     @ViewModelKey(PullRequestViewModel::class)
-    abstract fun bindMPullRequestViewModel(pullRequestViewModel: PullRequestViewModel): ViewModel
+    abstract fun bindPullRequestViewModel(pullRequestViewModel: PullRequestViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelProviderFactory): ViewModelProvider.Factory
