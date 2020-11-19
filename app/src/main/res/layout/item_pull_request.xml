@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -26,13 +27,15 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/medium_text"
                     android:text="@{item.title}"
-                    android:textColor="@color/colorBlue"/>
+                    android:textColor="@color/colorBlue"
+                    tools:text="guava"/>
 
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/small_text"
-                    android:text="@{item.data}"/>
+                    android:text="@{item.data}"
+                    tools:text="2020-11-19"/>
 
         </LinearLayout>
 
@@ -41,7 +44,8 @@
                 android:layout_height="match_parent"
                 android:textSize="@dimen/small_text"
                 android:layout_marginTop="@dimen/small_margin"
-                android:text="@{item.body}"/>
+                android:text="@{item.body}"
+                tools:text="Is one PULL REQUEST"/>
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -56,7 +60,8 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{item.loginUser}"/>
+                    android:text="@{item.loginUser}"
+                    tools:text="and123"/>
 
         </LinearLayout>
 

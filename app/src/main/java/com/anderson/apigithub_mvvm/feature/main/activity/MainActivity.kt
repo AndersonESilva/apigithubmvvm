@@ -23,6 +23,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun getViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
 
     private lateinit var adapter: RepositoryAdapter
+    private var isLoading = false
 
     override fun init() {
         bind.viewModel = viewModel
@@ -52,17 +53,20 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             when(resource.status) {
                 Resource.Status.INIT -> { showLoading() }
                 Resource.Status.SUCCESS -> {
-                    hideLoading()
-                    bind.progressMain.visibility = View.GONE
                     adapter.submitList(resource.data)
                     adapter.notifyDataSetChanged()
+                    bind.progressMain.visibility = View.GONE
+                    hideLoading()
+                    isLoading = false
                 }
                 Resource.Status.LOADING -> {
                     bind.progressMain.visibility = View.VISIBLE
+                    isLoading = true
                 }
                 Resource.Status.ERROR -> {
                     hideLoading()
                     showError()
+                    isLoading = false
                 }
             }
         })
@@ -73,7 +77,9 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if(!bind.recyclerMain.canScrollVertically(1)){
-                    viewModel.getRepositories()
+                    if(!isLoading){
+                        viewModel.getRepositories()
+                    }
                 }
             }
         }

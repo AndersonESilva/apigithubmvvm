@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
                 name="item"
                 type="com.anderson.apigithub_mvvm.data.presentation.RepositoryPresentation"/>
-
     </data>
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="@dimen/big_padding"
-    >
+            android:layout_height="wrap_content"
+            android:padding="@dimen/big_padding">
 
         <LinearLayout
                 android:layout_width="250dp"
@@ -27,7 +26,8 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/medium_text"
                     android:text="@{item.name}"
-                    android:textColor="@color/colorBlue"/>
+                    android:textColor="@color/colorBlue"
+                    tools:text="guava"/>
 
             <LinearLayout
                     android:layout_width="wrap_content"
@@ -45,7 +45,8 @@
                         android:layout_height="wrap_content"
                         android:text="@{item.forksCount}"
                         android:textSize="16dp"
-                        android:textColor="@color/colorYellow"/>
+                        android:textColor="@color/colorYellow"
+                        tools:text="8842"/>
 
                 <ImageView
                         android:layout_width="match_parent"
@@ -58,7 +59,8 @@
                         android:layout_height="wrap_content"
                         android:text="@{item.starsCount}"
                         android:textSize="16dp"
-                        android:textColor="@color/colorYellow"/>
+                        android:textColor="@color/colorYellow"
+                        tools:text="8823142"/>
 
             </LinearLayout>
 
@@ -80,8 +82,7 @@
                     android:layout_gravity="center"
                     android:text="@{item.login}"
                     android:layout_marginTop="@dimen/mini_margin"
-            />
-
+                    tools:text="Google"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -31,7 +31,7 @@ class MainViewModel @Inject constructor(private val repository: GitHubRepository
 
     fun getRepositories(){
         if(page > 0){
-            _resource.value = Resource.loading()
+            _resource.value = Resource.loading(_resource.value?.data)
         }
         page++
         job = Coroutines.ioThenMain(
