@@ -1,11 +1,10 @@
 package com.anderson.apigithub_mvvm
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.anderson.apigithub_mvvm.data.response.ItemResponse
-import com.anderson.apigithub_mvvm.data.response.RepositoryResponse
+import com.anderson.apigithub_mvvm.data.response.PullRequestResponse
 import com.anderson.apigithub_mvvm.data.response.Resource
-import com.anderson.apigithub_mvvm.feature.main.conveter.MainConverter
-import com.anderson.apigithub_mvvm.feature.main.viewmodel.MainViewModel
+import com.anderson.apigithub_mvvm.feature.pullRequest.converter.PullRequestConverter
+import com.anderson.apigithub_mvvm.feature.pullRequest.viewmodel.PullRequestViewModel
 import com.anderson.apigithub_mvvm.service.GitHubRepository
 import com.nhaarman.mockitokotlin2.whenever
 import kotlinx.coroutines.Dispatchers
@@ -22,6 +21,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
@@ -30,7 +30,7 @@ import org.mockito.MockitoAnnotations
  */
 @RunWith(JUnit4::class)
 @ExperimentalCoroutinesApi
-class MainViewModelTest {
+class PullRequestViewModelTest{
 
     @get:Rule
     val rule = InstantTaskExecutorRule()
@@ -39,9 +39,9 @@ class MainViewModelTest {
     lateinit var repository: GitHubRepository
 
     @Mock
-    lateinit var converter: MainConverter
+    lateinit var converter: PullRequestConverter
 
-    lateinit var viewModel: MainViewModel
+    lateinit var viewModel: PullRequestViewModel
 
     private val testDispatcher = TestCoroutineDispatcher()
 
@@ -50,7 +50,7 @@ class MainViewModelTest {
         MockitoAnnotations.initMocks(this)
 
         Dispatchers.setMain(testDispatcher)
-        viewModel = MainViewModel(repository, converter)
+        viewModel = PullRequestViewModel(repository, converter)
     }
 
     @After
@@ -60,11 +60,10 @@ class MainViewModelTest {
     }
 
     @Test
-    fun testGetRepositoriesDataError() = runBlocking {
+    fun testGetPullRequestesDataError() = runBlocking {
+        whenever(repository.getPullRequestes(anyString(), anyString())).thenReturn(Resource.error(anyString()))
 
-        whenever(repository.getRepositories(1)).thenReturn(Resource.error(""))
-
-        viewModel.getRepositories()
+        viewModel.getPullRequestes(anyString(), anyString())
         delay(2000L)
 
         val value = viewModel.resource.value
@@ -72,18 +71,18 @@ class MainViewModelTest {
     }
 
     @Test
-    fun testGetRepositoriesDataSuccess() = runBlocking {
-        whenever(repository.getRepositories(1)).thenReturn(successMock())
+    fun testGetPullRequestesDataSuccess() = runBlocking {
+        whenever(repository.getPullRequestes(anyString(), anyString())).thenReturn(successMock())
 
-        viewModel.getRepositories()
+        viewModel.getPullRequestes(anyString(), anyString())
         delay(2000L)
 
         val value = viewModel.resource.value
         assertEquals(Resource.Status.SUCCESS, value?.status)
     }
 
-    private fun successMock(): Resource<ItemResponse>{
-        val list = listOf<RepositoryResponse>()
-        return Resource.success(ItemResponse(list))
+    private fun successMock(): Resource<List<PullRequestResponse>>{
+        val list = listOf<PullRequestResponse>()
+        return Resource.success(list)
     }
 }
