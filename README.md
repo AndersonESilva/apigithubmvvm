@@ -24,4 +24,4 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 Feito por Anderson E Silva 👋🏽 Entre em contato!
 
-[![Linkedin Badge](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andersonesilva/) [![Linkedin Badge](https://img.shields.io/badge/Microsoft%20Outlook-0078D4?logo=microsoft-outlook&logoColor=white&style=for-the-badge)](andersoneraldodasilva@live.com) 
+[![Linkedin Badge](https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/andersonesilva/) [![Linkedin Badge](https://img.shields.io/badge/Microsoft%20Outlook-0078D4?logo=microsoft-outlook&logoColor=white&style=for-the-badge)](mailto:andersoneraldodasilva@live.com) 
