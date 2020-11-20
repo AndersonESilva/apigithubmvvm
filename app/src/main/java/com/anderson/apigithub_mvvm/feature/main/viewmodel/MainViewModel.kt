@@ -26,7 +26,6 @@ class MainViewModel @Inject constructor(private val repository: GitHubRepository
 
     init {
         _resource.value = Resource.init()
-        getRepositories()
     }
 
     fun getRepositories(){

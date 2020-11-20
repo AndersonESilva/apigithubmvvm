@@ -31,6 +31,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
         initToolbar()
         initRecyclerView()
         observeResource()
+        viewModel.getRepositories()
     }
 
     private fun initToolbar(){
