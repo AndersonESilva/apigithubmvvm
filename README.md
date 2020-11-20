@@ -1,6 +1,6 @@
 # GitHub Show
 
-## App que exibi Repositorios e Pull Request públicos do GitHub com Android Kotlin em MVVM
+### App que exibi Repositorios e Pull Request públicos do GitHub com Android Kotlin em MVVM
 
 ![Bagde](https://img.shields.io/static/v1?label=nativo&message=Android&color=<COLOR>&style=<STYLE>&logo=<LOGO>)
 
