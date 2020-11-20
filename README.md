@@ -16,7 +16,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 - [Picasso](https://square.github.io/picasso/)
 - [Mockito](https://site.mockito.org/)
 
-<a href="https://blog.rocketseat.com.br/author/thiago/">
+
  <img style="border-radius: 50%;" src="https://media-exp1.licdn.com/dms/image/C4D03AQEOp9_F5mDJPg/profile-displayphoto-shrink_200_200/0/1603192433791?e=1611187200&v=beta&t=LWKJd9u-CXRXQjrVdTXmO2tOM_nRdEY4Y9S7B_P9B6A" width="100px;" alt=""/>
  <br />
  <sub><b>Anderson E Silva</b></sub></a> 🚀
