@@ -50,9 +50,11 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun observeResource(){
-        viewModel.resource.observe(this, Observer { resource ->
-            when(resource.status) {
-                Resource.Status.INIT -> { showLoading() }
+        viewModel.resource.observe(this) { resource ->
+            when (resource.status) {
+                Resource.Status.INIT -> {
+                    showLoading()
+                }
                 Resource.Status.SUCCESS -> {
                     adapter.submitList(resource.data)
                     adapter.notifyDataSetChanged()
@@ -70,7 +72,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
                     isLoading = false
                 }
             }
-        })
+        }
     }
 
     private fun onScrollListener(): RecyclerView.OnScrollListener{

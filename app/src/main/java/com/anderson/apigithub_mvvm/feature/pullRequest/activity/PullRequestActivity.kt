@@ -33,9 +33,7 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
     private lateinit var repositoryPresentation: RepositoryPresentation
     private lateinit var adapter: PullRequestAdapter
 
-    override fun getLayoutId(): Int {
-        return R.layout.activity_pull_request
-    }
+    override fun getLayoutId(): Int = R.layout.activity_pull_request
 
     override fun getViewModelClass(): Class<PullRequestViewModel> = PullRequestViewModel::class.java
 
@@ -71,9 +69,11 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
     }
 
     private fun observeResource(){
-        viewModel.resource.observe(this, Observer { resource ->
-            when(resource.status) {
-                Resource.Status.INIT -> { showLoading() }
+        viewModel.resource.observe(this) { resource ->
+            when (resource.status) {
+                Resource.Status.INIT -> {
+                    showLoading()
+                }
                 Resource.Status.SUCCESS -> {
                     hideLoading()
                     bind.progressPull.visibility = View.GONE
@@ -89,7 +89,7 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
                     showError()
                 }
             }
-        })
+        }
     }
 
     private fun clickInItem(item: PullRequestPresentation){
