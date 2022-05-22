@@ -9,13 +9,12 @@ import com.anderson.apigithub_mvvm.feature.common.BaseViewModel
 import com.anderson.apigithub_mvvm.feature.main.conveter.MainConverter
 import com.anderson.apigithub_mvvm.service.GitHubRepository
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 /**
  * Created by anderson on 21/09/19.
  */
-class MainViewModel @Inject constructor(private val repository: GitHubRepository,
-                                        private val converter: MainConverter) : BaseViewModel() {
+class MainViewModel(private val repository: GitHubRepository,
+                    private val converter: MainConverter): BaseViewModel() {
 
     private val _resource = MutableLiveData<Resource<List<RepositoryPresentation>>>()
     private var page = 0

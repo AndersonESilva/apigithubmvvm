@@ -1,11 +1,9 @@
 package com.anderson.apigithub_mvvm.service
 
-import javax.inject.Inject
-
 /**
  * Created by anderson on 15/11/2020.
  */
-class GitHubRepository @Inject constructor(val service: GitHubService) : BaseDataSource(){
+class GitHubRepository(val service: GitHubService) : BaseDataSource(){
 
     companion object {
         const val  q = "language:Java"

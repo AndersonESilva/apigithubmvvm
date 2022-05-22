@@ -1,7 +1,6 @@
 package com.anderson.apigithub_mvvm.feature.main.activity
 
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anderson.apigithub_mvvm.R
@@ -12,21 +11,20 @@ import com.anderson.apigithub_mvvm.feature.common.BaseActivity
 import com.anderson.apigithub_mvvm.feature.main.adapter.RepositoryAdapter
 import com.anderson.apigithub_mvvm.feature.main.viewmodel.MainViewModel
 import com.anderson.apigithub_mvvm.feature.pullRequest.activity.PullRequestActivity
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by anderson on 21/09/19.
  */
-class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun getLayoutId(): Int = R.layout.activity_main
 
-    override fun getViewModelClass(): Class<MainViewModel> = MainViewModel::class.java
-
+    private val viewModel: MainViewModel by viewModel()
     private lateinit var adapter: RepositoryAdapter
     private var isLoading = false
 
     override fun init() {
-        bind.viewModel = viewModel
 
         initToolbar()
         initRecyclerView()
@@ -35,7 +33,7 @@ class MainActivity : BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     private fun initToolbar(){
-        supportActionBar?.title = resources.getString(R.string.app_name)
+        supportActionBar?.title = resources.getString(R.string.application_name)
     }
 
     private fun initRecyclerView(){

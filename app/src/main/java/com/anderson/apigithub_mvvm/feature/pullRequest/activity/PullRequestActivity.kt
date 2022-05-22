@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.anderson.apigithub_mvvm.R
 import com.anderson.apigithub_mvvm.data.presentation.PullRequestPresentation
@@ -14,11 +13,12 @@ import com.anderson.apigithub_mvvm.databinding.ActivityPullRequestBinding
 import com.anderson.apigithub_mvvm.feature.common.BaseActivity
 import com.anderson.apigithub_mvvm.feature.pullRequest.adapter.PullRequestAdapter
 import com.anderson.apigithub_mvvm.feature.pullRequest.viewmodel.PullRequestViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
  * Created by anderson on 22/09/19.
  */
-class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequestViewModel>() {
+class PullRequestActivity : BaseActivity<ActivityPullRequestBinding>() {
 
     companion object {
         const val REPO_OBJ = "repoObj"
@@ -30,16 +30,13 @@ class PullRequestActivity : BaseActivity<ActivityPullRequestBinding, PullRequest
         }
     }
 
+    private val viewModel: PullRequestViewModel by viewModel()
     private lateinit var repositoryPresentation: RepositoryPresentation
     private lateinit var adapter: PullRequestAdapter
 
     override fun getLayoutId(): Int = R.layout.activity_pull_request
 
-    override fun getViewModelClass(): Class<PullRequestViewModel> = PullRequestViewModel::class.java
-
     override fun init() {
-        bind.viewModel = viewModel
-
         repositoryPresentation = (intent.extras?.getSerializable(REPO_OBJ) as? RepositoryPresentation)!!
 
         initToolbar()
